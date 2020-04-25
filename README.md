@@ -18,6 +18,6 @@ The corresponding commands for the master branch are:
 git checkout master
 git rebase -X ours dev
 python -m nbconvert --execute --inplace --ExecutePreprocessor.timeout=600 analysis.ipynb retrieve_clean_data.ipynb
-git commit -m "Executing notebooks" --amend
+git commit --amend --reset-author
 git push --force
 ```
