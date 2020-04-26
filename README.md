@@ -2,6 +2,9 @@
 
 ## General
 
+With this analysis, I want to get a personal feeling for the current COVID-19
+situation and numbers.
+
 The analysis notebook including plots can be seen in [analysis.ipynb \[rendered\]](https://github.com/mbyt/covid-19_analysis/blob/master/analysis.ipynb).
 
 Data sources ("*John Hopkins University*" and "*Berliner Morgenpost*") are extracted as shown in [retrieve_clean_data.ipynb \[rendered\]](https://github.com/mbyt/covid-19_analysis/blob/master/retrieve_clean_data.ipynb) and cached as [cases.csv](https://github.com/mbyt/covid-19_analysis/blob/master/cases.csv).
