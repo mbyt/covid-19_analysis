@@ -15,6 +15,10 @@ follows:
 
 The corresponding commands for the master branch are:
 ```bash
+git checkout dev
+# to the changes, run the notebooks
+python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace analysis.ipynb retrieve_clean_data.ipynb
+git commit -m "<description>"
 git checkout master
 git rebase -X ours dev
 python -m nbconvert --execute --inplace --ExecutePreprocessor.timeout=600 analysis.ipynb retrieve_clean_data.ipynb
