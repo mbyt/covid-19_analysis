@@ -28,12 +28,12 @@ Corresponding commands are:
 ```bash
 git checkout dev
 # make changes and run notebooks
-python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace *.ipynb retrieve_clean_data.ipynb
+python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace retrieve_clean_data.ipynb analysis.ipynb
 git add -u
 git commit -m "<description>"
 git checkout master
 git rebase -X ours dev
-python -m nbconvert --execute --inplace --ExecutePreprocessor.timeout=600 analysis.ipynb retrieve_clean_data.ipynb
+python -m nbconvert --execute --inplace --ExecutePreprocessor.timeout=600 retrieve_clean_data.ipynb analysis.ipynb 
 git add -u
 git commit --amend --reset-author
 git push --force
