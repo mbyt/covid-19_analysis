@@ -8,7 +8,7 @@ Data sources ("*John Hopkins University*" and "*Berliner Morgenpost*") are extra
 
 ## Development
 
-In order to avoid polluting the `git diff` through changed `Output[*]`
+In order to avoid polluting the `git diff` through changed Jupyter `Output[*]`
 cells (especially images are problematic), the following development workflow
 based on [mgeier git-jupyter](https://mg.readthedocs.io/git-jupyter.html) is used.
 
@@ -16,7 +16,7 @@ That is, development happens in the `dev` branch, where no cell outputs
 are pushed. The latest commit of the master branch is the one with
 executed notebooks (that is with `Output[*]` cells). The worflow is then as
 follows:
-* commit with no `Output` in the dev branch
+* commit with no Jupyter `Output[*]` payload in the dev branch
 * rebase the master on dev
 * execute the notebooks
 * amend the the execute notebook commit on master and force push
@@ -24,7 +24,7 @@ follows:
 Corresponding commands are:
 ```bash
 git checkout dev
-# to the changes, run the notebooks
+# make changes and run notebooks
 python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace *.ipynb retrieve_clean_data.ipynb
 git add -u
 git commit -m "<description>"
