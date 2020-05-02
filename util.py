@@ -1,6 +1,11 @@
 from datetime import datetime
+from typing import List, Dict, Union, Iterable
+
 import numpy as np
 import scipy.optimize as op
+
+import pytest
+from typeguard import typechecked
 
 
 MPL_FIG_TITLE_DATE_FORMAT = '%b%d'
@@ -12,11 +17,12 @@ UNIX_DATE_DELTA = datetime(1970, 1, 1)
 DATETIME64_TO_DATETIME_SCALER = 1e-9
 
 
-def isodate2xtick(date):
+@typechecked
+def isodate2xtick(date: datetime):
     return (date - UNIX_DATE_DELTA).days
 
 
-def markdown_table_fmt(params):
+def markdown_table_fmt(params: Iterable[Union[int, float, datetime, str]]):
     f = lambda x: ("%.4g" % x if isinstance(x, (int, float)) else
                    x.isoformat()[:10] if isinstance(x, datetime) else
                    x)
@@ -90,3 +96,18 @@ def bfgs_curve_fit(f, xdata, ydata, p0, lagrange=1.0, norm=L2, bounds=None, verb
         min_val = bfgs_func(p0, lagrange=lagrange, norm=norm)
         print('  min_val:', min_val)
     return res['x'], res['hess_inv']
+
+
+#
+# TESTS
+#
+test_runtime_data = [
+    (isodate2xtick, [datetime(2020, 4, 1)], ['2020-04-01']),
+    (markdown_table_fmt, [[1, 1.0, '1.0', datetime(2020,4,1)]], [1]),
+]
+@pytest.mark.parametrize('fct,ok_args,nok_args', test_runtime_data)
+def test_runtime_typecheck(fct, ok_args, nok_args):
+    fct(*ok_args)
+    with pytest.raises(TypeError):
+        fct(*nok_args)
+

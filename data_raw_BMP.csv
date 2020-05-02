@@ -1,4 +1,4 @@
-date,Germany_confirmed_BMP,Germany_recovered_BMP,Germany_death_BMP
+date,confirmed,recovered_alive,death
 2020-02-18,16,9,0
 2020-02-19,16,10,0
 2020-02-20,16,10,0
