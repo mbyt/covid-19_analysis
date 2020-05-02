@@ -17,7 +17,7 @@ def isodate2xtick(date):
 
 
 def markdown_table_fmt(params):
-    f = lambda x: ("%.4g" % x if isinstance(x, float) else
+    f = lambda x: ("%.4g" % x if isinstance(x, (int, float)) else
                    x.isoformat()[:10] if isinstance(x, datetime) else
                    x)
     s = (f(p) for p in params)
