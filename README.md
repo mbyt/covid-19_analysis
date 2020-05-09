@@ -26,8 +26,7 @@ follows:
 
 Corresponding commands are:
 ```bash
-git checkout dev
-# make changes and run notebooks
+# make changes and "Run all" notebooks
 python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace retrieve_clean_data.ipynb analysis.ipynb
 git add -u
 git commit -m "<description>"
@@ -37,4 +36,5 @@ python -m nbconvert --execute --inplace --ExecutePreprocessor.timeout=600 retrie
 git add -u
 git commit --amend --reset-author
 git push --force
+git checkout dev
 ```
