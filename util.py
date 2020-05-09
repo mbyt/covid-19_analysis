@@ -3,7 +3,7 @@ from typing import List, Dict, Union, Iterable
 
 import numpy as np
 import scipy.optimize as op
-
+import pandas as pd
 import pytest
 from typeguard import typechecked
 
@@ -21,8 +21,8 @@ DATETIME64_TO_DATETIME_SCALER = 1e-9
 def isodate2xtick(date: datetime):
     return (date - UNIX_DATE_DELTA).days
 
-
-def markdown_table_fmt(params: Iterable[Union[int, float, datetime, str]]):
+@typechecked
+def markdown_table_fmt(params: Iterable[Union[int, float, datetime, str]]) -> str:
     f = lambda x: ("%.4g" % x if isinstance(x, (int, float)) else
                    x.isoformat()[:10] if isinstance(x, datetime) else
                    x)
@@ -59,8 +59,8 @@ def plot_pow2_fit(df, begin_date, end_date, expfct, key,
     ax.set_ylabel('total cases')
     return ax
 
-
-def calc_pow2_zero(df, begin_date, rate, key):
+@typechecked
+def calc_pow2_zero(df: pd.DataFrame, begin_date: datetime, rate: float, key: str) -> float:
     y0 = df.loc[begin_date == df.index, key][0]
     x0 = rate * np.log(y0) / np.log(2)
     return x0
@@ -104,6 +104,9 @@ def bfgs_curve_fit(f, xdata, ydata, p0, lagrange=1.0, norm=L2, bounds=None, verb
 test_runtime_data = [
     (isodate2xtick, [datetime(2020, 4, 1)], ['2020-04-01']),
     (markdown_table_fmt, [[1, 1.0, '1.0', datetime(2020,4,1)]], [1]),
+    #(calc_pow2_zero, [pd.DataFrame(data=dict(key=[3]*4)), datetime(2020,4,1), 22.0, "key"],
+    #                 [dict(key=[3]*4), datetime(2020,4,1), 22.0, "key"]
+    #),
 ]
 @pytest.mark.parametrize('fct,ok_args,nok_args', test_runtime_data)
 def test_runtime_typecheck(fct, ok_args, nok_args):

@@ -26,7 +26,7 @@ follows:
 
 Corresponding commands are:
 ```bash
-# make changes and "Run all" notebooks
+# make changes and "Run All Cells" in the notebooks
 python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace retrieve_clean_data.ipynb analysis.ipynb
 git add -u
 git commit -m "<description>"
