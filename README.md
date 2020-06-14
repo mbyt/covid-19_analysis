@@ -33,6 +33,7 @@ git commit -m "<description>"
 git checkout master
 git rebase -X ours dev
 python -m nbconvert --execute --inplace --ExecutePreprocessor.timeout=600 retrieve_clean_data.ipynb analysis.ipynb 
+git status
 git add -u
 git commit --amend --reset-author
 # dangerouse: "git push origin --all --force", better to use per branch
